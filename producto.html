@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - Dulces Tentaciones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            background-color: #FFF3E0;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: #8B4513;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #8B4513;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #D2691E;
+        }
+
+        .catalog-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #8B4513;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: #FFF3E0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            color: #8B4513;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: #D2691E;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .ingredients-title {
+            color: #8B4513;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredients-list {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        footer {
+            background-color: #8B4513;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">D' Genesis</a>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="productos.html">Productos</a>
+                <a href="index.html#ubicacion">Ubicación</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="catalog-container">
+        <h1 class="page-title">Nuestro Catálogo </h1>
+        
+        <div class="product-grid">
+            <!-- Pan 1 -->
+            <div class="product-card">
+                <img src="./images/panfrances.jpg" alt="Pan Francés" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Pan Francés</h2>
+                    <p class="product-price">$2.50</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina de trigo, agua, levadura, sal, mejorante de pan</p>
+                </div>
+            </div>
+
+            <!-- Pan 2 -->
+            <div class="product-card">
+                <img src="./images/panintegral.jpg" alt="Pan Integral" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Pan Integral</h2>
+                    <p class="product-price">$3.00</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina integral, agua, levadura, sal, semillas de girasol, linaza</p>
+                </div>
+            </div>
+
+            <!-- Pan 3 -->
+            <div class="product-card">
+                <img src="./images/3leches.jpg" alt="Pan de Centeno" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Dulce de 3 leches</h2>
+                    <p class="product-price">$3.50</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina de centeno, harina de trigo, agua, levadura, sal</p>
+                </div>
+            </div>
+
+            <!-- Pan 4 -->
+            <div class="product-card">
+                <img src="./images/pastelchocolate.jpg" alt="Croissant" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Pastel de chocolate</h2>
+                    <p class="product-price">$2.75</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina de trigo, mantequilla, leche, huevos, levadura, sal, azúcar</p>
+                </div>
+            </div>
+
+            <!-- Pan 5 -->
+            <div class="product-card">
+                <img src="./images/alfajores.jpg" alt="Pan Ciabatta" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Alfajores</h2>
+                    <p class="product-price">$4.00</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina de trigo, agua, aceite de oliva, levadura, sal</p>
+                </div>
+            </div>
+
+            <!-- Pan 6 -->
+            <div class="product-card">
+                <img src="./images/red.jpg" alt="Pan Multigranos" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">cupcake red velvet</h2>
+                    <p class="product-price">$4.50</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina integral, semillas variadas, agua, levadura, sal, miel</p>
+                </div>
+            </div>
+
+            <!-- Pan 7 -->
+            <div class="product-card">
+                <img src="./images/hojaldre.jpg" alt="Pan de Aceitunas" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Pastel de hojaldre</h2>
+                    <p class="product-price">$4.25</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina de trigo, aceitunas negras, aceite de oliva, agua, levadura, sal</p>
+                </div>
+            </div>
+
+            <!-- Pan 8 -->
+            <div class="product-card">
+                <img src="./images/yuca.jpg" alt="Pan de Queso" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Pan de yuca</h2>
+                    <p class="product-price">$3.75</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina de trigo, queso, leche, mantequilla, huevos, levadura, sal</p>
+                </div>
+            </div>
+
+            <!-- Pan 9 -->
+            <div class="product-card">
+                <img src="./images/cinnamon.jpeg" alt="Pan de Pasas y Nueces" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Cinnamon</h2>
+                    <p class="product-price">$4.75</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina de trigo, pasas, nueces, agua, levadura, sal, miel</p>
+                </div>
+            </div>
+
+            <!-- Pan 10 -->
+            <div class="product-card">
+                <img src="./images/ajo.jpg" alt="Pan de Ajo" class="product-image">
+                <div class="product-details">
+                    <h2 class="product-name">Pan de Ajo</h2>
+                    <p class="product-price">$3.25</p>
+                    <p class="ingredients-title">Ingredientes:</p>
+                    <p class="ingredients-list">Harina de trigo, ajo, mantequilla, perejil, agua, levadura, sal</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Dulces Tentaciones - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

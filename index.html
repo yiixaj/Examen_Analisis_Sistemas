@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulces Tentaciones - Panadería y Pastelería</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Header */
+        header {
+            background-color: #FFF3E0;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: #8B4513;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #8B4513;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #D2691E;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('./images/background.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            background-color: #D2691E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #8B4513;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #8B4513;
+            margin-bottom: 3rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: #FFF3E0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: #666;
+        }
+
+        /* Location Section */
+        .location {
+            background-color: #FFF3E0;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .location-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #8B4513;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">D' Genesis</div>
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="producto.html">Catálogo</a>
+                <a href="https://maps.app.goo.gl/8rkdgW9hxUXfwN48A">Ubicacion</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Dulces Tentaciones</h1>
+            <p>Los mejores panes y pasteles artesanales de la ciudad</p>
+            <a href="#productos" class="cta-button">Ver Productos</a>
+        </div>
+    </section>
+
+    <section class="products" id="productos">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="./images/pan1.jpg" alt="Pan tradicional" class="product-image">
+                <div class="product-info">
+                    <h3>Pan Tradicional</h3>
+                    <p>Elaborado con ingredientes frescos y naturales</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./images/pan2.png" alt="Pasteles" class="product-image">
+                <div class="product-info">
+                    <h3>Pasteles</h3>
+                    <p>Para todas tus celebraciones especiales</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="./images/pan3.jpg" alt="Repostería" class="product-image">
+                <div class="product-info">
+                    <h3>Repostería</h3>
+                    <p>Deliciosos postres artesanales</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="location" id="ubicacion">
+        <div class="location-content">
+            <h2 class="section-title">Nuestra Ubicación</h2>
+            <p>Encuéntranos en el corazón de la ciudad</p>
+            <br>
+            <a href="https://maps.app.goo.gl/8rkdgW9hxUXfwN48A" class="cta-button" id="maps-button">Ver en Google Maps</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Dulces Tentaciones - Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        // Smooth scroll para los enlaces de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Cambiar la opacidad del header al hacer scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(255, 243, 224, 0.95)';
+            } else {
+                header.style.backgroundColor = '#FFF3E0';
+            }
+        });
+    </script>
+</body>
+</html>
