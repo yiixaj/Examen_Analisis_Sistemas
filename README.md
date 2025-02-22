@@ -19,7 +19,14 @@ Este repositorio contiene el examen de la materia **Análisis y Diseño de Siste
 ## 📷 Vista previa del proyecto
 ![Vista previa](images/background.png)
 
-## 📷 Vista previa del proyecto
-![Vista previa](images/video.mp4)
+## 🎬 Vista previa del proyecto
+![Vista previa](images/video.gif)
+
+## 🌐 Demo en Vivo  
+🔗 **Visita la aplicación aquí:** [Panadería de Génesis](https://panaderiadegenesis.netlify.app)
+
+
+
+
 
 
