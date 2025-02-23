@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - D' Genesis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .cart-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 2fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .remove-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .checkout-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #8B4513;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .checkout-btn {
+            background-color: #D2691E;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .total-amount {
+            text-align: right;
+            font-size: 1.5rem;
+            color: #8B4513;
+            margin: 1rem 0;
+        }
+
+        .main-cart-btn {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            background-color: #D2691E;
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .main-cart-btn:hover {
+            background-color: #8B4513;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        .main-cart-btn:active {
+            transform: translateY(1px);
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .cart-count {
+            background-color: #8B4513;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+            border: 2px solid white;
+        }
+
+        @media (max-width: 768px) {
+            .main-cart-btn {
+                right: 50%;
+                transform: translateX(50%);
+                min-width: 80%;
+                bottom: 1rem;
+            }
+        }
+
+        .payment-details {
+            display: none;
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid #ddd;
+        }
+
+        .payment-details.active {
+            display: block;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .delivery-fee {
+            color: #8B4513;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header remains the same -->
+
+    <main class="cart-container">
+        <h1 class="page-title">Carrito de Compras</h1>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+
+        <div class="total-amount" id="totalAmount">
+            Total: $0.00
+        </div>
+
+        <form class="checkout-form" id="checkoutForm">
+            <div class="form-group">
+                <label for="name">Nombre Completo:</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentMethod">Método de Pago:</label>
+                <select id="paymentMethod" required>
+                    <option value="efectivo">Efectivo</option>
+                    <option value="tarjeta">Tarjeta</option>
+                </select>
+            </div>
+
+            <div class="payment-details" id="paymentDetails">
+                <div class="form-group">
+                    <label for="cardNumber">Número de Tarjeta:</label>
+                    <input type="text" id="cardNumber" maxlength="16" pattern="\d{16}" placeholder="1234567890123456">
+                </div>
+
+                <div class="form-group">
+                    <label for="cardName">Nombre en la Tarjeta:</label>
+                    <input type="text" id="cardName">
+                </div>
+
+                <div class="card-grid">
+                    <div class="form-group">
+                        <label for="expiryDate">Fecha de Caducidad:</label>
+                        <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" maxlength="3" pattern="\d{3}" placeholder="123">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="deliveryMethod">Método de Entrega:</label>
+                <select id="deliveryMethod" required onchange="toggleAddress()">
+                    <option value="pickup">Recoger en tienda</option>
+                    <option value="delivery">Delivery</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="addressGroup" style="display: none;">
+                <label for="address">Dirección de Entrega:</label>
+                <textarea id="address" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="checkout-btn">Confirmar Orden</button>
+        </form>
+    </main>
+
+    <script>
+        function displayCart() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.getElementById('cartItems');
+            let subtotal = 0;
+        
+            if (!cartContainer) {
+                console.error('No se encontró el contenedor del carrito');
+                return;
+            }
+        
+            cartContainer.innerHTML = '';
+        
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = '<p>No hay productos en el carrito</p>';
+                updateTotal(0);
+                return;
+            }
+        
+            cartItems.forEach((item, index) => {
+                if (!item || !item.name || !item.price || !item.quantity) {
+                    console.error('Item inválido:', item);
+                    return;
+                }
+        
+                const price = parseFloat(item.price);
+                subtotal += price * item.quantity;
+        
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <img src="${item.image || 'placeholder.jpg'}" alt="${item.name}" onerror="this.src='placeholder.jpg'">
+                    <h3>${item.name}</h3>
+                    <p>$${price.toFixed(2)}</p>
+                    <p>Cantidad: ${item.quantity}</p>
+                    <button class="remove-btn" onclick="removeItem(${index})">Eliminar</button>
+                `;
+                cartContainer.appendChild(itemElement);
+            });
+        
+            updateTotal(subtotal);
+        }
+        
+        function updateTotal(subtotal) {
+            const deliveryMethod = document.getElementById('deliveryMethod').value;
+            const deliveryFee = deliveryMethod === 'delivery' ? 3.50 : 0;
+            const total = subtotal + deliveryFee;
+        
+            const totalElement = document.getElementById('totalAmount');
+            const deliveryFeeElement = document.getElementById('deliveryFee');
+        
+            if (totalElement) {
+                totalElement.innerHTML = `
+                    <div class="delivery-fee" id="deliveryFee">
+                        ${deliveryMethod === 'delivery' ? `Cargo por delivery: $3.50` : ''}
+                    </div>
+                    Total: $${total.toFixed(2)}
+                `;
+            }
+        }
+        
+        function togglePaymentDetails() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const paymentDetails = document.getElementById('paymentDetails');
+            const cardInputs = paymentDetails.querySelectorAll('input');
+        
+            if (paymentMethod === 'tarjeta') {
+                paymentDetails.classList.add('active');
+                cardInputs.forEach(input => input.required = true);
+            } else {
+                paymentDetails.classList.remove('active');
+                cardInputs.forEach(input => input.required = false);
+            }
+        }
+        
+        function removeItem(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            
+            if (cart.length === 0) {
+                window.location.href = 'productos.html';
+            }
+        }
+        
+        function toggleAddress() {
+            const deliveryMethod = document.getElementById('deliveryMethod').value;
+            const addressGroup = document.getElementById('addressGroup');
+            const addressInput = document.getElementById('address');
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            let subtotal = 0;
+        
+            cartItems.forEach(item => {
+                if (item && item.price && item.quantity) {
+                    subtotal += parseFloat(item.price) * item.quantity;
+                }
+            });
+        
+            if (deliveryMethod === 'delivery') {
+                addressGroup.style.display = 'block';
+                addressInput.required = true;
+            } else {
+                addressGroup.style.display = 'none';
+                addressInput.required = false;
+            }
+        
+            updateTotal(subtotal);
+        }
+        
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('No hay productos en el carrito');
+                return;
+            }
+        
+            const formData = {
+                name: document.getElementById('name').value,
+                cedula: document.getElementById('cedula').value,
+                phone: document.getElementById('phone').value,
+                paymentMethod: document.getElementById('paymentMethod').value,
+                deliveryMethod: document.getElementById('deliveryMethod').value,
+                address: document.getElementById('deliveryMethod').value === 'delivery' ? 
+                        document.getElementById('address').value : 'Pickup en tienda'
+            };
+        
+            if (formData.paymentMethod === 'tarjeta') {
+                formData.cardDetails = {
+                    number: document.getElementById('cardNumber').value,
+                    name: document.getElementById('cardName').value,
+                    expiry: document.getElementById('expiryDate').value,
+                    cvv: document.getElementById('cvv').value
+                };
+            }
+        
+            alert('¡Hemos efectuado su compra!');
+            localStorage.removeItem('cart');
+            window.location.href = 'index.html';
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCart();
+            toggleAddress();
+            togglePaymentDetails();
+            
+            // Event listeners para cambios en los select
+            document.getElementById('paymentMethod').addEventListener('change', togglePaymentDetails);
+            document.getElementById('deliveryMethod').addEventListener('change', toggleAddress);
+        });
+        
+        window.onload = function() {
+            displayCart();
+            toggleAddress();
+            togglePaymentDetails();
+        };
+        </script>
+    <footer>
+        <p></p>
+    </footer>
+</body>
+</html>
